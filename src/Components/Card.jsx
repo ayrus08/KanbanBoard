@@ -11,7 +11,7 @@ const Card = ({
   statusicons,
 }) => {
   return (
-    <div className="card">
+    <div className="card" key={tkts.id}>
       <div>
         <div>
           <span className="tktid">{tkts.id}</span>
@@ -30,7 +30,7 @@ const Card = ({
           </div>
         )}
         {tkts.tag.map((t) => (
-          <div className="tag">
+          <div className="tag" key={t}>
             <div className="dot">
               <GoDotFill />
             </div>

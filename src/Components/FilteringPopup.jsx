@@ -8,13 +8,11 @@ const FilteringPopup = ({
   SetOrdering,
   SetFilteringPopup,
   openref,
+  sortfunction,
 }) => {
   const popupRef = useRef(null);
 
   const handleDocumentClick = (e) => {
-    // console.log("popupref = ", popupRef.current);
-    // console.log("e.target = ", e.target);
-    // console.log("open ref =", openref);
     if (
       popupRef.current &&
       !popupRef.current.contains(e.target) &&
@@ -36,7 +34,6 @@ const FilteringPopup = ({
           value={grouping}
           onChange={(e) => {
             SetGrouping(e.target.value);
-            console.log(e.target.value);
           }}
         >
           <option value="status">Status</option>
@@ -53,7 +50,7 @@ const FilteringPopup = ({
           value={ordering}
           onChange={(e) => {
             SetOrdering(e.target.value);
-            console.log(e.target.value);
+            sortfunction(e.target.value);
           }}
         >
           <option value="priority">Priority</option>

@@ -34,7 +34,7 @@ const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
   return (
     <>
       {allcolums.map((e) => (
-        <div className="perstatus">
+        <div className="percol" key={e}>
           <div className="nameandfunc">
             <div className="statusandnum">
               {filterkey === "status" && (
@@ -56,7 +56,7 @@ const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
                   {users
                     .filter((user) => user.id === e)
                     .map((usr) => (
-                      <span>{usr.name}</span>
+                      <span key={usr.id}>{usr.name}</span>
                     ))}
                 </div>
               )}

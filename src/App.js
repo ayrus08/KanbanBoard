@@ -12,8 +12,23 @@ import KanbanBoard from "./Components/KanbanBoard";
 
 function App() {
   const openref = useRef(null);
-  let [grouping, SetGrouping] = useState("status");
-  let [ordering, SetOrdering] = useState("Priority");
+
+  const storedgroupingState =
+    JSON.parse(localStorage.getItem("storedgroupingState")) || "status";
+  const storedorderingState =
+    JSON.parse(localStorage.getItem("storedorderingState")) || "priority";
+
+  let [grouping, SetGrouping] = useState(storedgroupingState);
+  let [ordering, SetOrdering] = useState(storedorderingState);
+
+  useEffect(() => {
+    localStorage.setItem("storedgroupingState", JSON.stringify(grouping));
+  }, [grouping]);
+
+  useEffect(() => {
+    localStorage.setItem("storedorderingState", JSON.stringify(ordering));
+  }, [ordering]);
+
   let [tickets, SetTickets] = useState([]);
   let [allunqusers, setAllunqusers] = useState([]);
   let [users, SetUsers] = useState([]);
@@ -28,7 +43,6 @@ function App() {
       }
     });
     setAllunqusers(uniqueUserIds);
-    console.log("unq ids = ", uniqueUserIds);
   };
 
   let allStatus = ["Backlog", "Todo", "In progress", "Done", "Canceled"];
@@ -37,14 +51,50 @@ function App() {
     axios
       .get(" https://api.quicksell.co/v1/internal/frontend-assignment ")
       .then((res) => {
-        console.log(res.data.tickets);
         getunquser(res.data.tickets);
-        SetTickets(res.data.tickets);
+        SetTickets(
+          ordering === "priority"
+            ? res.data.tickets.sort((a, b) => b.priority - a.priority)
+            : res.data.tickets.sort((a, b) => {
+                const nameA = a.title.toUpperCase(); // ignore case
+                const nameB = b.title.toUpperCase(); // ignore case
+
+                if (nameA < nameB) {
+                  return -1; // a should come before b
+                }
+                if (nameA > nameB) {
+                  return 1; // a should come after b
+                }
+                return 0; // names are equal
+              })
+        );
         SetUsers(res.data.users);
-        console.log(res.data.users);
       })
       .catch((error) => console.log(error));
   }, []);
+  const sortfunction = (order) => {
+    if (order === "priority") {
+      let k = [];
+      k = tickets.sort((a, b) => b.priority - a.priority);
+
+      SetTickets(() => [...k]);
+    } else if (order === "title") {
+      let k = [];
+      k = tickets.sort((a, b) => {
+        const nameA = a.title.toUpperCase(); // ignore case
+        const nameB = b.title.toUpperCase(); // ignore case
+
+        if (nameA < nameB) {
+          return -1; // a should come before b
+        }
+        if (nameA > nameB) {
+          return 1; // a should come after b
+        }
+        return 0; // names are equal
+      });
+      SetTickets(() => [...k]);
+    }
+  };
   return (
     <div>
       <div className="filterdiv">
@@ -67,6 +117,7 @@ function App() {
             SetOrdering={SetOrdering}
             SetFilteringPopup={SetFilteringPopup}
             openref={openref}
+            sortfunction={sortfunction}
           />
         )}
       </div>
