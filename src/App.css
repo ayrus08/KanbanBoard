@@ -42,7 +42,7 @@
   height: calc(100vh - 66px);
   padding-left: 30px;
   padding-right: 30px;
-  overflow: auto;
+  overflow-x: auto;
 }
 
 
