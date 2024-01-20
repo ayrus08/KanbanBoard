@@ -16,6 +16,7 @@ import Card from "./Card";
 const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
   const btmlefticon = filterkey === "priority" ? "none" : "priority";
   const titleicon = filterkey === "status" ? "none" : "status";
+  const imgoncard = filterkey === "userId" ? false : true;
   const prioritymap = ["No Priority", "Low", "Medium", "High", "Urgent"];
   const prioritymapicons = [
     <BsThreeDots color="grey" />,
@@ -31,9 +32,13 @@ const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
     Done: <FaRegCheckCircle color="#5e6ad2" />,
     Canceled: <MdCancel color="grey" />,
   };
+
+  const randomImgLink = "https://picsum.photos/20/20?random=";
+  // to get random images for the users
+
   return (
     <>
-      {allcolums.map((e) => (
+      {allcolums.map((e, ind) => (
         <div className="percol" key={e}>
           <div className="nameandfunc">
             <div className="statusandnum">
@@ -56,7 +61,15 @@ const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
                   {users
                     .filter((user) => user.id === e)
                     .map((usr) => (
-                      <span key={usr.id}>{usr.name}</span>
+                      <div className="imgandname">
+                        <img
+                          src={randomImgLink + ind}
+                          className="imgs"
+                          alt=""
+                        />
+                        {/* ABOVE SRC LINK GERNERATES A RANDOM IMAGE ON EVERY RELOAD*/}
+                        <span key={usr.id}>{usr.name}</span>
+                      </div>
                     ))}
                 </div>
               )}
@@ -83,6 +96,7 @@ const KanbanBoard = ({ allcolums, tickets, filterkey, users }) => {
                   titleicon={titleicon}
                   prioritymapicons={prioritymapicons}
                   statusicons={statusicons}
+                  imgoncard={imgoncard}
                 />
               ))}
           </div>

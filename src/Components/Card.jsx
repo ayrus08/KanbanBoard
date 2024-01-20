@@ -9,12 +9,26 @@ const Card = ({
   titleicon,
   prioritymapicons,
   statusicons,
+  imgoncard,
 }) => {
+  const randomImgLink = "https://picsum.photos/20/20?random=";
+  // to get random images for the users
   return (
     <div className="card" key={tkts.id}>
       <div>
-        <div>
+        <div className="imgandtktid">
           <span className="tktid">{tkts.id}</span>
+
+          {imgoncard && (
+            <span>
+              <img
+                src={randomImgLink + tkts.userId.split("-")[1]}
+                className="imgs"
+                alt=""
+              />
+              {/* GENERATING RANDOM IMAGES */}
+            </span>
+          )}
         </div>
         <div className="titleandicon">
           {titleicon === "status" && (

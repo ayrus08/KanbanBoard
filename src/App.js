@@ -141,56 +141,6 @@ function App() {
           />
         )}
         {grouping === "user" && (
-          // <>
-          //   {allunqusers.map((e) => (
-          //     <div className="perstatus">
-          //       <div className="nameandfunc">
-          //         <div className="statusandnum">
-          //           <span>{e}</span>
-          //           <span className="tktid">
-          //             {tickets.filter((tkt) => tkt.userId === e).length}
-          //           </span>
-          //         </div>
-          //         <div className="plusanddots">
-          //           <span>
-          //             <FaPlus color="grey" />
-          //           </span>
-          //           <span>
-          //             <BsThreeDots color="grey" />
-          //           </span>
-          //         </div>
-          //       </div>
-          //       <div className="allcardsdiv">
-          //         {tickets
-          //           .filter((tkt) => tkt.userId === e)
-          //           .map((tkts) => (
-          //             <div className="card">
-          //               <div>
-          //                 <div>
-          //                   <span className="tktid">{tkts.id}</span>
-          //                   {/* <img src="" alt="" /> */}
-          //                 </div>
-          //                 <div className="title">{tkts.title}</div>
-          //               </div>
-          //               <div className="tags">
-          //                 <div className="dashdashdash">
-          //                   <AiOutlineDash />
-          //                 </div>
-          //                 {tkts.tag.map((t) => (
-          //                   <div className="tag">
-          //                     <div className="dot">
-          //                       <GoDotFill />
-          //                     </div>
-          //                     <span>{t}</span>
-          //                   </div>
-          //                 ))}
-          //               </div>
-          //             </div>
-          //           ))}
-          //       </div>
-          //     </div>
-          //   ))}
-          // </>
           <KanbanBoard
             allcolums={allunqusers}
             tickets={tickets}

@@ -84,6 +84,28 @@
   -webkit-line-clamp: 2;
   }
 
+  .imgs {
+    max-width: 20px;
+    max-height: 20px;
+    overflow: hidden;
+    border-radius: 9999px;
+  }
+
+  .imgandname {
+    display: flex;
+    align-items: center;
+  }
+
+  .imgandtktid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .imgandname > * + * {
+    margin-left: .5rem;
+  }
+
   .icon {
     padding-top: 0.05rem;
     width: fit-content;
@@ -128,7 +150,7 @@
 
 
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
     .percol {
       min-width: 70%;
       max-width: 70%;
@@ -141,7 +163,21 @@
         padding-top: 0.1rem;
       }
   }
-  @media screen and (min-width: 400px) and (max-width: 769px){
+  @media screen and (min-width: 425px) and (max-width: 600px){
+    .percol {
+      
+      min-width: 60%;
+      max-width: 60%;
+    }
+    .iconandname > * + * {
+        margin-left: 0.3rem;
+      }
+      .statusandnum > * + * {
+        margin-left: 0.3rem;
+      }
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 769px){
     .percol {
       
       min-width: 40%;
@@ -154,11 +190,12 @@
         margin-left: 0.3rem;
       }
   }
+
   
   @media screen and (min-width: 769px) and (max-width: 1200px) {
     .percol {
-      min-width: 30%;
-      max-width: 30%;
+      min-width: 32%;
+      max-width: 32%;
     }
   }
 
