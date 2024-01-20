@@ -102,7 +102,11 @@ function App() {
           className="displayfilter"
           ref={openref}
           onClick={() => {
-            SetFilteringPopup(true);
+            if (!filteringpopup) {
+              SetFilteringPopup(true);
+            } else {
+              SetFilteringPopup(false);
+            }
           }}
         >
           <LuSettings2 />
